@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { inter, playfair } from "../fonts";
 import "./globals.css";
-import { Navbar2 } from "@/components/Navbar2";
+import { Navbar } from "@/components/Navbar";
 // import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -21,10 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang='en' className={`${inter.variable} ${playfair.variable}`}>
       <body>
-        <div className="min-h-screen flex flex-col">
-          <Navbar2 />
+        <div className='min-h-screen flex flex-col'>
+          <Navbar />
           <main>{children}</main>
           {/* <Footer /> */}
         </div>
