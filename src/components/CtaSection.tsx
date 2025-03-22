@@ -39,15 +39,6 @@ export default function CtaSection() {
               Contact Our Team
               <ArrowRight size={18} className='group-hover:translate-x-1 transition-transform' />
             </a>
-            <a
-              href='#services'
-              className={cn(
-                "px-6 py-3 rounded-lg font-medium transition-all",
-                "bg-white/10 text-white hover:bg-white/20"
-              )}
-            >
-              Explore Services
-            </a>
           </div>
         </div>
       </div>
