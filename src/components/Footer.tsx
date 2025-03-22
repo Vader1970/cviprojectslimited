@@ -26,7 +26,7 @@ export default function Footer() {
       <div className='section-container py-16'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
           <div>
-            <h3 className='text-xl font-display font-bold mb-4'>VoightBuild</h3>
+            <h3 className='text-xl font-display font-bold mb-4'>CVI Projects Limited</h3>
             <p className='text-white/80 mb-6'>
               Transforming construction challenges into seamless realities through expert project management and
               innovative solutions.
