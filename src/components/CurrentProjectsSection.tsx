@@ -75,7 +75,7 @@ export default function CurrentProjectsSection() {
                 "px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300",
                 activeProject === index
                   ? "bg-primary text-white shadow-md"
-                  : "bg-white text-primary border border-primary/20 hover:bg-primary/5"
+                  : "bg-white text-primary border border-primary/20 hover:bg-primary/10"
               )}
             >
               <div className='flex items-center gap-2'>

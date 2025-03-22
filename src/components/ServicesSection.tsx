@@ -59,9 +59,14 @@ function AnimatedSection({ children }: { children: React.ReactNode }) {
           if (entry.isIntersecting) {
             const elements = currentRef?.querySelectorAll(".reveal-animation");
             elements?.forEach((el, index) => {
+              // Calculate row and position based delays
+              const row = Math.floor(index / 4); // 4 cards per row
+              const position = index % 4;
+              const delay = row * 400 + position * 150; // 200ms between rows, 150ms between items
+
               setTimeout(() => {
                 el.classList.add("active");
-              }, index * 100);
+              }, delay);
             });
           }
         });

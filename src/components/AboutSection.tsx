@@ -33,13 +33,11 @@ export default function AboutSection() {
       <div className='section-container'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'>
           <RevealAnimation>
-            <span className='section-subtitle'>ABOUT US</span>
-            <h2 className='section-title'>Construction Management Excellence</h2>
+            <span className='section-subtitle'>Who Are We</span>
+            <h2 className='section-title'>Exclusive Construction Firm for Chance Voight Investment Corporation</h2>
             <p className='text-muted-foreground text-lg mb-8'>
-              CVI Projects is a standalone construction management firm specialising in delivering high-quality building
-              projects and fit-outs. While operating independently, CVI Projects carries out construction and
-              development work on behalf of Chance Voight Investment Partners, ensuring seamless execution of their
-              building initiatives.
+              CVI Projects carries out construction and development work on behalf of Chance Voight Investment Partners,
+              ensuring seamless execution of their building initiatives.
             </p>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8'>
@@ -68,7 +66,9 @@ export default function AboutSection() {
                     quality={85}
                   />
                   <div className='image-overlay absolute inset-0 bg-black/20'>
-                    <span className='text-white text-sm font-medium absolute bottom-4 left-4'>Before</span>
+                    <span className='text-white text-sm font-medium absolute bottom-4 left-4'>
+                      56 Cloudesley Street, Bealey{" "}
+                    </span>
                   </div>
                 </div>
                 <div className='image-container aspect-square'>
@@ -81,7 +81,7 @@ export default function AboutSection() {
                     quality={85}
                   />
                   <div className='image-overlay'>
-                    <span className='text-white text-sm font-medium'>After</span>
+                    <span className='text-white text-sm font-medium'>54 Cloudesley Street, Bealey</span>
                   </div>
                 </div>
               </div>
@@ -96,7 +96,7 @@ export default function AboutSection() {
                     quality={85}
                   />
                   <div className='image-overlay'>
-                    <span className='text-white text-sm font-medium'>Before</span>
+                    <span className='text-white text-sm font-medium'>56 Cloudesley Street, Bealey</span>
                   </div>
                 </div>
                 <div className='image-container aspect-[3/4]'>
@@ -109,7 +109,7 @@ export default function AboutSection() {
                     quality={85}
                   />
                   <div className='image-overlay'>
-                    <span className='text-white text-sm font-medium'>After</span>
+                    <span className='text-white text-sm font-medium'>56 Cloudesley Street, Bealey</span>
                   </div>
                 </div>
               </div>

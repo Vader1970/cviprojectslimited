@@ -116,10 +116,11 @@ export const Navbar = (props: NavbarProps) => {
           {navLinks.map((navLink, index) => (
             <div key={index} className='first:pt-4 lg:first:pt-0'>
               {navLink.subMenuLinks && navLink.subMenuLinks.length > 0 ? (
-                <SubMenu navLink={navLink} isMobile={isMobile} />
+                <SubMenu navLink={navLink} isMobile={isMobile} setIsMobileMenuOpen={setIsMobileMenuOpen} />
               ) : (
                 <Link
                   href={navLink.url}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className='block py-3 lg:px-4 lg:py-2 lg:text-base text-primary/80 hover:text-primary text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full'
                 >
                   {navLink.title}
@@ -140,8 +141,21 @@ export const Navbar = (props: NavbarProps) => {
   );
 };
 
-const SubMenu = ({ navLink, isMobile }: { navLink: NavLink; isMobile: boolean }) => {
+const SubMenu = ({
+  navLink,
+  isMobile,
+  setIsMobileMenuOpen,
+}: {
+  navLink: NavLink;
+  isMobile: boolean;
+  setIsMobileMenuOpen: (value: boolean) => void;
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleLinkClick = () => {
+    setIsDropdownOpen(false);
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav
@@ -189,6 +203,7 @@ const SubMenu = ({ navLink, isMobile }: { navLink: NavLink; isMobile: boolean })
               <Link
                 key={index}
                 href={subMenuLink.url}
+                onClick={handleLinkClick}
                 className='block py-3 text-center lg:px-4 lg:py-2 lg:text-left text-primary/80 hover:text-primary text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full'
               >
                 {subMenuLink.title}
@@ -203,19 +218,20 @@ const SubMenu = ({ navLink, isMobile }: { navLink: NavLink; isMobile: boolean })
 
 export const NavbarDefaults: Props = {
   logo: {
-    url: "#",
+    url: "#hero",
     src: "/logos/cvi-projects-logo.png",
     alt: "CVI Projects Logo",
   },
   navLinks: [
-    { title: "Who We Are", url: "#" },
-    { title: "Who We Work With", url: "#" },
-    { title: "Current Projects", url: "#" },
+    { title: "Who Are We", url: "#about" },
+    { title: "Who We Work With", url: "#services" },
+    { title: "Current Projects", url: "#current-projects" },
   ],
   buttons: [
     {
       title: "Contact",
       variant: "default",
+      href: "#contact",
     },
   ],
 };

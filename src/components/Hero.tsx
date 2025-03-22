@@ -27,7 +27,7 @@ export const Hero = (props: HeroProps) => {
     ...props,
   };
   return (
-    <section id='relume' className='relative px-[5%]'>
+    <section id='hero' className='relative px-[5%]'>
       <div className='container relative z-10'>
         <div className='flex max-h-[60rem] min-h-svh items-center justify-center py-16 text-center md:py-24 lg:py-28'>
           <div className='w-full max-w-lg'>
