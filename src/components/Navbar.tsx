@@ -1,13 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState } from "react";
-import { Button, useMediaQuery } from "@relume_io/relume-ui";
-import type { ButtonProps } from "@relume_io/relume-ui";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { useMediaQuery } from "@relume_io/relume-ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { RxChevronDown } from "react-icons/rx";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 type ImageProps = {
   url?: string;
@@ -21,10 +21,16 @@ type NavLink = {
   subMenuLinks?: NavLink[];
 };
 
+type ButtonItem = {
+  title: string;
+  variant?: "default" | "outline";
+  href?: string;
+};
+
 type Props = {
   logo: ImageProps;
   navLinks: NavLink[];
-  buttons: ButtonProps[];
+  buttons: ButtonItem[];
 };
 
 export type NavbarProps = React.ComponentPropsWithoutRef<"section"> & Partial<Props>;
@@ -36,10 +42,25 @@ export const Navbar = (props: NavbarProps) => {
   };
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useMediaQuery("(max-width: 991px)");
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className='flex w-full items-center border-b border-border-primary bg-background-primary lg:min-h-18 lg:px-[5%]'>
+    <nav
+      className={cn(
+        "fixed top-0 flex w-full items-center lg:min-h-18 lg:px-[5%] z-50 bg-white transition-all duration-200",
+        isScrolled ? "bg-white/40 backdrop-blur-md shadow-sm" : ""
+      )}
+    >
       <div className='mx-auto size-full lg:grid lg:grid-cols-[0.375fr_1fr_0.375fr] lg:items-center lg:justify-between lg:gap-4'>
         <div className='flex min-h-16 items-center justify-between px-[5%] md:min-h-18 lg:min-h-full lg:px-0'>
           <Link href={logo.url || "#"}>
@@ -48,14 +69,16 @@ export const Navbar = (props: NavbarProps) => {
           <div className='flex items-center gap-4 lg:hidden'>
             <div>
               {buttons.map((button, index) => (
-                <Button key={index} className='w-full px-4 py-1' {...button}>
-                  {button.title}
+                <Button key={index} variant={button.variant || "default"} asChild={!!button.href} className='w-full'>
+                  {button.href ? <a href={button.href}>{button.title}</a> : button.title}
                 </Button>
               ))}
             </div>
             <button
               className='-mr-2 flex size-12 flex-col items-center justify-center'
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
             >
               <motion.span
                 className='my-[3px] h-0.5 w-6 bg-black'
@@ -95,7 +118,10 @@ export const Navbar = (props: NavbarProps) => {
               {navLink.subMenuLinks && navLink.subMenuLinks.length > 0 ? (
                 <SubMenu navLink={navLink} isMobile={isMobile} />
               ) : (
-                <Link href={navLink.url} className='block py-3 text-md lg:px-4 lg:py-2 lg:text-base'>
+                <Link
+                  href={navLink.url}
+                  className='block py-3 lg:px-4 lg:py-2 lg:text-base text-primary/80 hover:text-primary text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full'
+                >
                   {navLink.title}
                 </Link>
               )}
@@ -104,8 +130,8 @@ export const Navbar = (props: NavbarProps) => {
         </motion.div>
         <div className='hidden justify-self-end lg:block'>
           {buttons.map((button, index) => (
-            <Button key={index} className='px-6 py-2' {...button}>
-              {button.title}
+            <Button key={index} variant={button.variant || "default"} asChild={!!button.href}>
+              {button.href ? <a href={button.href}>{button.title}</a> : button.title}
             </Button>
           ))}
         </div>
@@ -123,7 +149,7 @@ const SubMenu = ({ navLink, isMobile }: { navLink: NavLink; isMobile: boolean })
       onMouseLeave={() => !isMobile && setIsDropdownOpen(false)}
     >
       <button
-        className='flex w-full items-center justify-center gap-4 py-3 text-center text-md lg:w-auto lg:flex-none lg:justify-start lg:gap-2 lg:px-4 lg:py-2 lg:text-base'
+        className='flex w-full items-center justify-center gap-4 py-3 text-center lg:w-auto lg:flex-none lg:justify-start lg:gap-2 lg:px-4 lg:py-2 lg:text-base text-primary/80 hover:text-primary text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full'
         onClick={() => setIsDropdownOpen((prev) => !prev)}
       >
         <span>{navLink.title}</span>
@@ -160,7 +186,11 @@ const SubMenu = ({ navLink, isMobile }: { navLink: NavLink; isMobile: boolean })
             className='bg-background-primary lg:absolute lg:z-50 lg:border lg:border-border-primary lg:p-2 lg:[--y-close:25%]'
           >
             {navLink.subMenuLinks?.map((subMenuLink, index) => (
-              <Link key={index} href={subMenuLink.url} className='block py-3 text-center lg:px-4 lg:py-2 lg:text-left'>
+              <Link
+                key={index}
+                href={subMenuLink.url}
+                className='block py-3 text-center lg:px-4 lg:py-2 lg:text-left text-primary/80 hover:text-primary text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full'
+              >
                 {subMenuLink.title}
               </Link>
             ))}
@@ -178,14 +208,14 @@ export const NavbarDefaults: Props = {
     alt: "CVI Projects Logo",
   },
   navLinks: [
-    { title: "Link One", url: "#" },
-    { title: "Link Two", url: "#" },
-    { title: "Link Three", url: "#" },
+    { title: "Who We Are", url: "#" },
+    { title: "Who We Work With", url: "#" },
+    { title: "Current Projects", url: "#" },
   ],
   buttons: [
     {
-      title: "Button",
-      size: "sm",
+      title: "Contact",
+      variant: "default",
     },
   ],
 };

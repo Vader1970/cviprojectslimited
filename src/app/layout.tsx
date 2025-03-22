@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { inter, playfair } from "../fonts";
 import "./globals.css";
-import { Navbar } from "@/src/components/Navbar";
-// import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
+import dynamic from "next/dynamic";
+
+// Dynamically import Footer with no SSR since it's below the fold
+const Footer = dynamic(() => import("@/components/Footer"), {
+  loading: () => <footer className='bg-primary h-[200px]' />, // Simple loading placeholder
+});
 
 export const metadata: Metadata = {
   title: "CVI Projects Limited",
@@ -26,7 +31,7 @@ export default function RootLayout({
         <div className='min-h-screen flex flex-col'>
           <Navbar />
           <main>{children}</main>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </body>
     </html>

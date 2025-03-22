@@ -17,5 +17,9 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
-  "iconLibrary": "lucide"
+  "iconLibrary": "lucide",
+  "dependencies": {
+    "embla-carousel-react": "^8.3.0",
+    "@radix-ui/react-slot": "^1.1.0"
+  }
 }

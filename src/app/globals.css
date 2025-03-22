@@ -89,6 +89,66 @@ blockquote {
   .section-line {
     @apply border-t border-gray-200;
   }
+
+  .section-container {
+    @apply w-full max-w-xxl mx-auto px-6 sm:px-8 md:px-12 py-24;
+  }
+
+  .section-title {
+    @apply font-display text-4xl md:text-5xl font-semibold text-primary mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-sm uppercase tracking-widest text-muted-foreground mb-4;
+  }
+
+  .reveal-animation {
+    @apply opacity-0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .reveal-animation.active {
+    @apply opacity-100;
+    transform: translateY(0);
+  }
+
+  .card-hover {
+    @apply relative z-20 transition-all duration-300 ease-out;
+  }
+
+  .card-hover::before {
+    content: "";
+    @apply absolute top-0 left-0 w-full h-full bg-white rounded-lg opacity-0 transition-opacity duration-300 -z-10;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-hover:hover::before {
+    @apply opacity-100;
+  }
+
+  .image-container {
+    @apply relative overflow-hidden rounded-xl;
+  }
+
+  .image-overlay {
+    @apply absolute inset-0 bg-primary/50 opacity-0 transition-opacity duration-300 flex items-center justify-center;
+  }
+
+  .image-container:hover .image-overlay {
+    @apply opacity-100;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Navbar transparency/backdrop effect */
+  .navbar-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 }
 
 @layer base {
@@ -164,9 +224,7 @@ blockquote {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
@@ -238,19 +296,11 @@ blockquote {
   }
 
   /* Navbar transparency/backdrop effect */
-  .navbar-blur {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-}
-
-
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
