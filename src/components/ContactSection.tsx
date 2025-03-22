@@ -75,7 +75,7 @@ export default function ContactSection() {
           <RevealAnimation>
             <div className='relative w-full h-[600px] rounded-xl overflow-hidden shadow-lg border border-gray-100'>
               <Image
-                src='/images/map.jpg'
+                src='/images/map.JPG'
                 alt='Office Location Map'
                 fill
                 className='object-cover'
